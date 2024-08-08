@@ -1,22 +1,24 @@
 "use strict";
 
 const output = {
-    hello: (req, res) => {
-        res.render("home/index");
-    },
-    login: (req, res) => {
-        res.render("home/login");
-    }
-}
-
+  index: (req, res) => {
+    console.log("Cookies: ", req.cookies);
+    console.log("Signed Cookies: ", req.signedCookies);
+    res.sendFile(".");
+  },
+  login: (req, res) => {
+    res.sendFile("/login.html");
+  },
+};
 
 const process = {
-    login : (req, res) => {
-        console.log(req.body);
-    },
-}
+  login: (req, res) => {
+    const { id } = req.body;
+    res.cookie("id", id).redirect("/");
+  },
+};
 
 module.exports = {
-    output,
-    process,
+  output,
+  process,
 };
